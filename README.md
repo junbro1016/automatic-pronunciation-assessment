@@ -41,7 +41,9 @@ The elicitation paragraph contains most of the consonants, vowels, and clusters 
 
 ## Code description 📝
 ### labeling-via-fewshot-learning.ipynb
-<img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
+<a href="https://drive.google.com/file/d/106PaVDFToZVz6lGvJio5rx_OZ68eaaA7/view?usp=sharing">
+  <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
+</a>
 A dataset we wanted was that contains audio files of multiple people saying the same phrase, labeled with pronunciation scores, but this type of dataset was hard to find. So we decided to manually label the pronunciation scores ourselves. In the real service cases, we assume that the manual labeling is done by experts. However, it is too exhaustive and almost impossible to manually label all the audio data. Hence, we used a few-shot learning technique.
 
 In this stage, we first change our wav files into tensors. And before few-shot learning, we manually labeled the sample data as 0,1,2 (higher means better pronunciation) for accuracy, completeness, fluency, and prosodic. We then used this data and few-shot learning technique to label pronunciation scores for the entire dataset. If you wonder what each evaluation metric means, please refer below.
