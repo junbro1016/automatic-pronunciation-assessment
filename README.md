@@ -25,8 +25,18 @@ This repository conatins codes and descriptions of industry-academic-cooperation
 ### A) Speaking practice service for children with AI speaker NUGU
 - There is a market gap for active 'speaking' education for the alpha generation.
 - Due to the characteristics of AI speakers, it can be used for educational purposes even in households where smartphone usage is restricted.
-- Measuring a child's pronunciation skills through simple quizzes: Using the NUGU AI Speaker, we provide some simple quizzes to encourage a child to speak. Then, we provide parents with an **analysis report of the child's pronunciation** compared to normal pronunciation through deep learning techniques. This service will help develop the child's language skills in an untact environment. In addition, it **tracks the child's language development**, giving parents a comprehensive understanding of the child's language skills. (For a detailed description of the service, please refer to the `presentation.pdf` file in the `others` folder)
+- Measuring a child's pronunciation skills through simple quizzes: Using the NUGU AI Speaker, we provide some simple quizzes to encourage a child to speak. Then, we provide parents with an **analysis report of the child's pronunciation** compared to normal pronunciation through deep learning techniques. This service will help develop the child's language skills in an untact environment. In addition, it **tracks the child's language development**, giving parents a comprehensive understanding of the child's language skills. **(For a detailed description of the service, please refer to the `presentation.pdf` file in the `others` folder)**
 
 ## Data description 📁
+To evaluate the speaker’s pronunciation fluency, we utilized publicly opened data from the **“speech accent archive”** (Weinberger, Steven., 2015. Speech Accent Archive. George Mason University. Retrieved from http://accent.gmu.edu). This dataset is dedicated to the study of accents of people from different language backgrounds and provides English speech data recorded by people of different countries, genders, and ages. Native and non-native English speakers read a given English paragraph, and their readings are carefully recorded. Here’s how the researchers collected their data.
 
+They constructed an elicitation paragraph that read by each subject. This paragraph is written in common English words, but contains challenging English sound and sound sequences, encompassing practically all English phonetics. Each subject is recorded individually in a quiet room. Subjects sit at a table and are approximately 8-10 inches from the microphone. Subjects are then allowed to look at the elicitation paragraph for a minute or so, and they are permitted to ask about words that are unfamiliar. Subjects then read the paragraph once into a high-quality recording device. (Many of these recordings were done on a Sony TC-D5M using a Radio Shack 33-3001 unidirectional dynamic microphone, and on a Sony minidisk recorder. MDR-70, with a Sony ECM-MS907 stereo microphone) Every remote researcher must specify the type of recording device employed. Below is the recorded elicitation paragraph.
+
+The elicitation paragraph:
+
+> *Please call Stella. Ask her to bring these things with her from the store: Six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob. We also need a small plastic snake and a big toy frog for the children. She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.*
+
+The elicitation paragraph contains most of the consonants, vowels, and clusters of standard American English.
+
+## Code description 📝
 
