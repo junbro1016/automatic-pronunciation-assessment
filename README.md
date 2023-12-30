@@ -22,8 +22,6 @@ This repository conatins codes and descriptions of industry-academic-cooperation
 
 - Many families send children to academies for English education, but nonetheless, academies often focus on grammar and university enrollment exams rather than children's pronunciation and speaking skills.
 
------ 
-
 ### A) Speaking practice service for children with AI speaker NUGU
 - There is a market gap for active 'speaking' education for the alpha generation.
 - Due to the characteristics of AI speakers, it can be used for educational purposes even in households where smartphone usage is restricted.
