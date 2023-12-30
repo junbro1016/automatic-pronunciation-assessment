@@ -45,6 +45,7 @@ The elicitation paragraph contains most of the consonants, vowels, and clusters 
 
 ## 3. Code description 📝
 ### labeling-via-fewshot-learning.ipynb
+
 <a href="https://drive.google.com/file/d/106PaVDFToZVz6lGvJio5rx_OZ68eaaA7/view?usp=sharing">
   <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
 </a>
@@ -65,6 +66,7 @@ In this stage, we first change our wav files into tensors. And before few-shot l
 -----
 
 ### audio-augmentation.ipynb
+
 <a href="https://colab.research.google.com/drive/1zw5kRhNYB1QaseXYCwBDh68thdLqmfwZ?usp=sharing">
   <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
 </a>
@@ -83,6 +85,7 @@ The most important part of data augmentation is it can ensure the reliability of
 -----
 
 ### pronunciation-scoring-via-fine-tuned-model.ipynb
+
 <a href="https://colab.research.google.com/drive/1V-RS8K9Td6xEH0mTql73Rvbuur4jY2XR?usp=sharing">
   <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
 </a>
@@ -97,6 +100,7 @@ Finally, this is a stage for scoring the children’s pronunciation, and visuali
 -----
 
 ### pronunciation-scoreing-via-similarity.ipynb
+
 <a href="https://drive.google.com/file/d/1akewl-UtxENjAGkacZipZhxct7hZ0oFK/view?usp=sharing">
   <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
 </a>
@@ -110,6 +114,7 @@ This is the second approach, predicting the child’s pronunciation score based 
 -----
 
 ### evaluation.ipynb
+
 <a href="https://colab.research.google.com/drive/1TZWL_XVO5FodUlYasz0VSLkZky5vV-15?usp=sharing">
   <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
 </a>
