@@ -53,6 +53,8 @@ In this stage, we first change our wav files into tensors. And before few-shot l
 2. **Few shot learning**: Load the labeled data from 'audio_reference.pkl'. Define classes for audio encoding and few-shot learning. Split the data into training and testing sets. Set up the loss function (binary cross-entropy) and optimizer (Adam). Perform the training loop for data with the same and different classes.
 3. **Labeling via few shot learned model**: Initialize test data and switch the model to evaluation mode. Compute similarity scores for each class and update the DataFrame with predicted labels.
 
+-----
+
 ### audio-augmentation.ipynb
 After labeling the pronunciation scores of the speech data, data augmentation is performed. There are many benefits of it, but here are some of the most important ones.
 
@@ -64,4 +66,14 @@ The most important part of data augmentation is it can ensure the reliability of
 
 1. **Audio augmentation**: Augments audio data for machine learning by loading original audio information, creating paths for augmented files, and applying random modifications like pitch shifting and reverberation. The modified audio is then saved for later analysis.
 2. **Create a new reference pickle file for later use**: Combines information from original and augmented audio files, creating a new reference file. The extended DataFrame includes paths and scores for both sets, ensuring augmented files have the same scores as their originals. This is crucial for diverse and effective machine learning model training.
+
+-----
+
+### pronunciation-scoreing-via-similarity.ipynb
+Finally, this is a stage for scoring the children’s pronunciation, and visualize it as a graph. We take two different approaches to predict the children’s pronunciation, one based on the similarity comparison and the other based on the fine-tuned model prediction. This is the first approach, predicting the child’s pronunciation score based on the similarity to the reference data. A big assumption in this stage is that audio files with similar pronunciation will also be similar when they are vectorized. So if we have reference data consisting of audio files of different children pronouncing the same phrase and their pronunciation scores, we can determine the score of new input data based on the reference. The overall process is as follows.
+
+Convert the reference audio file to a tensor using Wav2Vec 2.0: After augmentation, we built our reference dataset by converting all the audio files into tensors using Wav2Vec 2.0 model.
+Convert test data into tensor and find the most similar tensors: When a recorded child’s voice comes through the AI speaker, we convert it to a tensor and find the reference that is most similar to it. In this case, we used cosine similarity to calculate the similarity.
+Visualize a child’s predicted pronunciation score: Visualize the child’s predicted pronunciation scores for the four categories in a radar chart. To visualize the graph, we used the plotly library.
+For the use of wav2vec 2.0 model, we referred to “wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations” (Baevski et al., 2020) from paperswithcode.
 
