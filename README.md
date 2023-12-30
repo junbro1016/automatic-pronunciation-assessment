@@ -28,7 +28,7 @@ This repository conatins codes and descriptions of industry-academic-cooperation
 - Measuring a child's pronunciation skills through simple quizzes: Using the NUGU AI Speaker, we provide some simple quizzes to encourage a child to speak. Then, we provide parents with an **analysis report of the child's pronunciation** compared to normal pronunciation through deep learning techniques. This service will help develop the child's language skills in an untact environment. In addition, it **tracks the child's language development**, giving parents a comprehensive understanding of the child's language skills. **(For a detailed description of the service, please refer to the `presentation.pdf` file in the `others` folder)**
 
 ## Data description 📁
-To evaluate the speaker’s pronunciation fluency, we utilized publicly opened data from the **“speech accent archive”** (Weinberger, Steven., 2015. Speech Accent Archive. George Mason University. Retrieved from http://accent.gmu.edu). This dataset is dedicated to the study of accents of people from different language backgrounds and provides English speech data recorded by people of different countries, genders, and ages. Native and non-native English speakers read a given English paragraph, and their readings are carefully recorded. Here’s how the researchers collected their data.
+To evaluate the speaker’s pronunciation fluency, we utilized publicly opened data from the [speech accent archive](http://accent.gmu.edu) (Weinberger, Steven., 2015. Speech Accent Archive. George Mason University). This dataset is dedicated to the study of accents of people from different language backgrounds and provides English speech data recorded by people of different countries, genders, and ages. Native and non-native English speakers read a given English paragraph, and their readings are carefully recorded. Here’s how the researchers collected their data.
 
 They constructed an elicitation paragraph that read by each subject. This paragraph is written in common English words, but contains challenging English sound and sound sequences, encompassing practically all English phonetics. Each subject is recorded individually in a quiet room. Subjects sit at a table and are approximately 8-10 inches from the microphone. Subjects are then allowed to look at the elicitation paragraph for a minute or so, and they are permitted to ask about words that are unfamiliar. Subjects then read the paragraph once into a high-quality recording device. (Many of these recordings were done on a Sony TC-D5M using a Radio Shack 33-3001 unidirectional dynamic microphone, and on a Sony minidisk recorder. MDR-70, with a Sony ECM-MS907 stereo microphone) Every remote researcher must specify the type of recording device employed. Below is the recorded elicitation paragraph.
 
@@ -39,4 +39,29 @@ The elicitation paragraph:
 The elicitation paragraph contains most of the consonants, vowels, and clusters of standard American English.
 
 ## Code description 📝
+### labeling-via-fewshot-learning.ipynb
+A dataset we wanted was that contains audio files of multiple people saying the same phrase, labeled with pronunciation scores, but this type of dataset was hard to find. So we decided to manually label the pronunciation scores ourselves. In the real service cases, we assume that the manual labeling is done by experts. However, it is too exhaustive and almost impossible to manually label all the audio data. Hence, we used a few-shot learning technique.
+
+In this stage, we first change our wav files into tensors. And before few-shot learning, we manually labeled the sample data as 0,1,2 (higher means better pronunciation) for accuracy, completeness, fluency, and prosodic. We then used this data and few-shot learning technique to label pronunciation scores for the entire dataset. If you wonder what each evaluation metric means, please refer below.
+
+- **accuracy**: The level at which the learner pronounces each word with an accurate utterance
+- **completeness**: The percentage of the words that are actually pronounced
+- **fluency**: Does the speaker pronounce smoothly and without unnecessary pauses?
+- **prosodic**: Does the speaker pronounce in correct intonation, stable speaking speed and rhythm?
+
+1. **Change wav to tensors and manually label samples**: Define a function to convert audio files to tensors using Wav2Vec2. Create a DataFrame to store file paths, vectors, and manual labels. Convert original audio files to tensors and store them in the DataFrame. Remove rows with NaN values and save the DataFrame as 'audio_reference.pkl'.
+2. **Few shot learning**: Load the labeled data from 'audio_reference.pkl'. Define classes for audio encoding and few-shot learning. Split the data into training and testing sets. Set up the loss function (binary cross-entropy) and optimizer (Adam). Perform the training loop for data with the same and different classes.
+3. **Labeling via few shot learned model**: Initialize test data and switch the model to evaluation mode. Compute similarity scores for each class and update the DataFrame with predicted labels.
+
+### audio-augmentation.ipynb
+After labeling the pronunciation scores of the speech data, data augmentation is performed. There are many benefits of it, but here are some of the most important ones.
+
+- **Improvement in Generalization Ability**: Augmentation helps the model to not overly rely on specific environments or conditions. This enables the model to maintain high performance in various real-world situations.
+- **Prevention of Overfitting**: Augmentation aids in preventing overfitting when the training data is limited. Exposure to diverse forms and types of data enhances the generalization ability, preventing the model from fitting to closely too the training set.
+- **Creation of Robust Models**: Augmentation helps in making model more robust and resilient. For example, it enhances the model’s ability to handle noise, environmental variations, and imperfect speech, contributing to its robustness in real-world scenarios.
+
+The most important part of data augmentation is it can ensure the reliability of the model. Speech recorded by A.I. speaker is susceptible to ambient noise. However, by adding noise and other sound effects during the augmentation process, we can create a model that is robust to these situations. To augment wav files, we referred [“Data Augmenting Contrastive Learning of Speech Representations in the Time Domain” (Kharitonov et al., 2020)](https://paperswithcode.com/paper/data-augmenting-contrastive-learning-of) from paperswithcode, and used WavAugment library.
+
+1. **Audio augmentation**: Augments audio data for machine learning by loading original audio information, creating paths for augmented files, and applying random modifications like pitch shifting and reverberation. The modified audio is then saved for later analysis.
+2. **Create a new reference pickle file for later use**: Combines information from original and augmented audio files, creating a new reference file. The extended DataFrame includes paths and scores for both sets, ensuring augmented files have the same scores as their originals. This is crucial for diverse and effective machine learning model training.
 
