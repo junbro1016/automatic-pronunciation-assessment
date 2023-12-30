@@ -5,6 +5,7 @@
   <img width="669" alt="스크린샷 2023-12-30 오후 5 49 04" src="https://github.com/JunBro1016/problem-solving/assets/82267460/a7b87f56-ad8c-4d9a-9d42-75d8b33e8e49">
 </div>
 
+
 This repository conatins codes and descriptions of industry-academic-cooperation project with **SKT NUGU** in Hanyang University's artificial intelligence and application class. **Tell your words** is a service that automatically evaluates children's English pronunciation using AI speakers. Below are the frameworks used for the project.
 
 <div align="left">
@@ -40,6 +41,7 @@ The elicitation paragraph contains most of the consonants, vowels, and clusters 
 
 ## Code description 📝
 ### labeling-via-fewshot-learning.ipynb
+<img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
 A dataset we wanted was that contains audio files of multiple people saying the same phrase, labeled with pronunciation scores, but this type of dataset was hard to find. So we decided to manually label the pronunciation scores ourselves. In the real service cases, we assume that the manual labeling is done by experts. However, it is too exhaustive and almost impossible to manually label all the audio data. Hence, we used a few-shot learning technique.
 
 In this stage, we first change our wav files into tensors. And before few-shot learning, we manually labeled the sample data as 0,1,2 (higher means better pronunciation) for accuracy, completeness, fluency, and prosodic. We then used this data and few-shot learning technique to label pronunciation scores for the entire dataset. If you wonder what each evaluation metric means, please refer below.
@@ -69,11 +71,33 @@ The most important part of data augmentation is it can ensure the reliability of
 
 -----
 
-### pronunciation-scoreing-via-similarity.ipynb
-Finally, this is a stage for scoring the children’s pronunciation, and visualize it as a graph. We take two different approaches to predict the children’s pronunciation, one based on the similarity comparison and the other based on the fine-tuned model prediction. This is the first approach, predicting the child’s pronunciation score based on the similarity to the reference data. A big assumption in this stage is that audio files with similar pronunciation will also be similar when they are vectorized. So if we have reference data consisting of audio files of different children pronouncing the same phrase and their pronunciation scores, we can determine the score of new input data based on the reference. The overall process is as follows.
+### pronunciation-scoring-via-fine-tuned-model.ipynb
+Finally, this is a stage for scoring the children’s pronunciation, and visualize it as a graph. We take two different approaches to predict the children’s pronunciation, one based on the fine-tuned model prediction and the other based on similarity comparison. This is the first approach, predicting the child’s pronunciation score based on the fine-tuned model prediction. In this stage, we used the labeled data from the few-shot learning to fine-tune the Wav2Vec2 model. Since we have total four target variables (`accuracy`, `completeness`, `fluency` and `prosodic`), we executed four different versions of model training, and utilized each fine-tuned model. For this stage, we referred to the [official guidance of Hugging Face](https://huggingface.co/docs/transformers/tasks/audio_classification). 
 
-Convert the reference audio file to a tensor using Wav2Vec 2.0: After augmentation, we built our reference dataset by converting all the audio files into tensors using Wav2Vec 2.0 model.
-Convert test data into tensor and find the most similar tensors: When a recorded child’s voice comes through the AI speaker, we convert it to a tensor and find the reference that is most similar to it. In this case, we used cosine similarity to calculate the similarity.
-Visualize a child’s predicted pronunciation score: Visualize the child’s predicted pronunciation scores for the four categories in a radar chart. To visualize the graph, we used the plotly library.
-For the use of wav2vec 2.0 model, we referred to “wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations” (Baevski et al., 2020) from paperswithcode.
+1. **Load and preprocess dataset**: Loads the `audio_reference_final.pkl` dataset, splits it into train, validation, and test sets, and saves the test set for later evaluation. Then creates a label mapping dictionary and loads the Wav2Vec2 feature extractor for audio data. A preprocessing function is defined to convert audio files into the proper format for fine-tuning.
+2. **Fine tuning**: Fine-tunes a pre-trained Wav2Vec2 model for four pronunciation aspects: `accuracy`, `completeness`, `fluency`, and `prosody`. For each aspect, the model is trained using specific hyperparameters, including learning rate and batch size. The `Trainer` class from the Hugging Face `transformers` library is utilized for the training process. The resulting models are pushed to the Hugging Face model hub for sharing.
+3. **Inference**: After fine-tuning, the models are used for inference on a test audio file `test.wav`. The file is preprocessed, and each fine-tuned model predicts logits for the four pronunciation aspects. The predicted class with the highest probability is determined, converted to a label using the model's `id2label` mapping, and printed for each aspect.
+4. **Graph visualization**: Using the `plotly` library, the code creates a radar chart to visually represent a child's pronunciation scores for the four aspects. The chart includes the child's scores and an average score for reference. This visualization provides a quick overview of the child's pronunciation performance in different aspects.
+
+-----
+
+### pronunciation-scoreing-via-similarity.ipynb
+This is the second approach, predicting the child’s pronunciation score based on the similarity to the reference data. For the use of wav2vec 2.0 model, we refered to [“wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations” (Baevski et al., 2020)](https://paperswithcode.com/paper/wav2vec-2-0-a-framework-for-self-supervised) from paperswithcode.
+
+1. **Change wav files to tensors via pre-trained wav2vec 2.0 model**: After augmentation, we built our reference dataset by converting all the audio files into tensors using Wav2Vec 2.0 model.
+2. **Convert new speech data into a tensor and find the n most similar tensors**: When a recorded child’s voice comes through the AI speaker, we convert it to a tensor and find the reference that is most similar to it. In this case, we used cosine similarity to calculate the similarity.
+3. **Graph a child's pronunciation score**: Visualize the child’s predicted pronunciation scores for the four categories in a radar chart. To visualize the graph, we used the `plotly` library.
+
+-----
+
+### evaluation.ipynb
+This is the very last stage of our pronunciation prediction. We wevaluate each model’s classification performance at this stage. Since we can’t say that our answer dataset is accurate, it’s wise to follow each process and make it as an opportunity to learn about the overall evaluation process. The evaluation process can be divided into two main steps.
+
+1. **Predict on test dataset**: First load our fine-tuned models and make a prediction on our test dataset.
+2. **Evaluation and graph visualization**: Compare the prediction with the original labels, and evaluate the model performance. Then visualize their prediction results as heatmap. To check various evaluation metrics results, we use `classification_report` from scikit learn.
+
+## Demonstration 🔥
+The demonstration video can be found from [here](https://youtu.be/m08JF9tZT98).
+
+
 
