@@ -17,7 +17,7 @@ This repository conatins codes and descriptions of industry-academic-cooperation
    <img src = "https://img.shields.io/badge/GoogleColab-F9AB00?style=flat-square&logo=Google%20Colab&logoColor=white"/>
 </div>
 
-## Introduction 😁
+## 1. Introduction 😁
 ### Q) Why are we doing this?
 - We all know how the communication skill is important. Also, education for children will affect the next generation. After the pandemic, the alpha(α) generation is facing the problem of lack of language skills. They have learned language through passive digital media such as YouTube instead of direct interactions. For these children, adults have to support to improve their language skill enough, but double-income family is universal especially in Korea, which makes it difficult to count on individual family member to educate their child.
 
@@ -28,7 +28,11 @@ This repository conatins codes and descriptions of industry-academic-cooperation
 - Due to the characteristics of AI speakers, it can be used for educational purposes even in households where smartphone usage is restricted.
 - Measuring a child's pronunciation skills through simple quizzes: Using the NUGU AI Speaker, we provide some simple quizzes to encourage a child to speak. Then, we provide parents with an **analysis report of the child's pronunciation** compared to normal pronunciation through deep learning techniques. This service will help develop the child's language skills in an untact environment. In addition, it **tracks the child's language development**, giving parents a comprehensive understanding of the child's language skills. **(For a detailed description of the service, please refer to the `presentation.pdf` file in the `others` folder)**
 
-## Data description 📁
+## 2. Data description 📁
+<div align="center">
+  <img width="699" alt="스크린샷 2023-12-30 오후 10 32 39" src="https://github.com/JunBro1016/problem-solving/assets/82267460/98da7ad4-c063-4007-9634-f8ca54518a66">
+</div>
+
 To evaluate the speaker’s pronunciation fluency, we utilized publicly opened data from the [speech accent archive](http://accent.gmu.edu) (Weinberger, Steven., 2015. Speech Accent Archive. George Mason University). This dataset is dedicated to the study of accents of people from different language backgrounds and provides English speech data recorded by people of different countries, genders, and ages. Native and non-native English speakers read a given English paragraph, and their readings are carefully recorded. Here’s how the researchers collected their data.
 
 They constructed an elicitation paragraph that read by each subject. This paragraph is written in common English words, but contains challenging English sound and sound sequences, encompassing practically all English phonetics. Each subject is recorded individually in a quiet room. Subjects sit at a table and are approximately 8-10 inches from the microphone. Subjects are then allowed to look at the elicitation paragraph for a minute or so, and they are permitted to ask about words that are unfamiliar. Subjects then read the paragraph once into a high-quality recording device. (Many of these recordings were done on a Sony TC-D5M using a Radio Shack 33-3001 unidirectional dynamic microphone, and on a Sony minidisk recorder. MDR-70, with a Sony ECM-MS907 stereo microphone) Every remote researcher must specify the type of recording device employed. Below is the recorded elicitation paragraph.
@@ -39,7 +43,7 @@ The elicitation paragraph:
 
 The elicitation paragraph contains most of the consonants, vowels, and clusters of standard American English.
 
-## Code description 📝
+## 3. Code description 📝
 ### labeling-via-fewshot-learning.ipynb
 <a href="https://drive.google.com/file/d/106PaVDFToZVz6lGvJio5rx_OZ68eaaA7/view?usp=sharing">
   <img src = "https://colab.research.google.com/assets/colab-badge.svg"/>
@@ -115,7 +119,7 @@ This is the very last stage of our pronunciation prediction. We wevaluate each m
 1. **Predict on test dataset**: First load our fine-tuned models and make a prediction on our test dataset.
 2. **Evaluation and graph visualization**: Compare the prediction with the original labels, and evaluate the model performance. Then visualize their prediction results as heatmap. To check various evaluation metrics results, we use `classification_report` from scikit learn.
 
-## Demonstration 🔥
+## 4. Demonstration 🔥
 The demonstration video can be found from [here](https://youtu.be/m08JF9tZT98).
 
 
