@@ -8,8 +8,10 @@
 This repository conatins codes and descriptions of industry-academic-cooperation project with **SKT NUGU** in Hanyang University's artificial intelligence and application class. **Tell your words** is a service that automatically evaluates children's English pronunciation using AI speakers. Below are the frameworks used for the project.
 
 <div align="left">
-   <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"/>
-   <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=Jupyter&logoColor=white"/>
-   <img src="https://img.shields.io/badge/Ultralytics-024DA1?style=flat-square&logo=Ultralytics&logoColor=white"/>
-   <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=OpenCV&logoColor=white"/>
+   <img src = "https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=PyTorch&logoColor=white"/>
+  <img src = "https://img.shields.io/badge/ScikitLearn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white"/>
+   <img src = "https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=NumPy&logoColor=white"/>
+   <img src = "https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
+   <img src = "https://img.shields.io/badge/GoogleColab-F9AB00?style=flat-square&logo=Google%20Colab&logoColor=white"/>
+  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/weiji14/deepbedmap/]
 </div>
