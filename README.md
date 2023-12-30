@@ -28,7 +28,7 @@ This repository conatins codes and descriptions of industry-academic-cooperation
 - Due to the characteristics of AI speakers, it can be used for educational purposes even in households where smartphone usage is restricted.
 - Measuring a child's pronunciation skills through simple quizzes: Using the NUGU AI Speaker, we provide some simple quizzes to encourage a child to speak. Then, we provide parents with an **analysis report of the child's pronunciation** compared to normal pronunciation through deep learning techniques. This service will help develop the child's language skills in an untact environment. In addition, it **tracks the child's language development**, giving parents a comprehensive understanding of the child's language skills.
 
-(For a detailed description of the service, please refer to the `presentation.pdf` file in the `others` folder)
+For a detailed description of the service, please refer to the `presentation.pdf` file in the `others` folder
 
 
 ## 2. Data description 📁
